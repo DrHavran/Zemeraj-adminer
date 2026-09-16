@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="./shared-modules/general.css">
+
+    <link
+        rel="icon"
+        href="https://cdn3.emoji.gg/emojis/8390-suicide.png"
+        type="image/x-icon"
+    >
+
+    <title>Zeměráj</title>
+</head>
+
+<body>
+    <main>
+        <div class="login-window">
+            <h2>Přihlášení</h2>
+
+            <form id="login-form">
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="E-mail"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Heslo"
+                    required
+                >
+
+                <button type="submit">Přihlásit</button>
+
+                <p id="login-error"></p>
+            </form>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="./shared-modules/footer.js"></script>
+    <script type="module" src="index.js"></script>
+
+</body>
+</html>
