@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="add-item.css">
+    <link rel="stylesheet" href="../../shared-modules/general.css">
+
+    <link
+        rel="icon"
+        href="https://raw.githubusercontent.com/DrHavran/Zemeraj-adminer/refs/heads/main/logo.png"
+        type="image/x-icon"
+    >
+
+    <title>Add item</title>
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <main>
+        <h2>Přidat položku</h2>
+
+        <form id="add-item-form">
+
+            <label for="name">Název</label>
+            <input type="text" id="name" required>
+
+            <label for="purchase-price">Nákupní cena</label>
+            <input type="number" id="purchase-price" step="0.01" min="0" required>
+
+            <label for="sale-price">Prodejní cena</label>
+            <input type="number" id="sale-price" step="0.01" min="0" required>
+
+            <label for="image-url">URL obrázku</label>
+            <input type="url" id="image-url">
+
+            <label>
+                <input type="checkbox" id="active" checked>
+                Aktivní
+            </label>
+
+            <button type="submit">Přidat položku</button>
+
+            <p id="message"></p>
+
+        </form>
+    </main>
+
+    <div id="footer"></div> 
+
+    <script src="../../shared-modules/footer.js"></script>
+    <script type="module" src="../../shared-modules/header.js"></script>
+    <script type="module" src="add-item.js"></script>
+
+</body>
+</html>

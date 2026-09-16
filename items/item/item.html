@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="items.css">
+    <link rel="stylesheet" href="item.css">
     <link rel="stylesheet" href="../../shared-modules/general.css">
 
     <link
         rel="icon"
-        href="https://cdn3.emoji.gg/emojis/8390-suicide.png"
+        href="https://raw.githubusercontent.com/DrHavran/Zemeraj-adminer/refs/heads/main/logo.png"
         type="image/x-icon"
     >
 
@@ -20,14 +20,66 @@
     <div id="header"></div>
 
     <main>
-        
+        <div id="item-view">
+            <h1 id="item-name"></h1>
+
+            <p>
+                Nákupní cena:
+                <span id="purchase-price"></span>
+            </p>
+
+            <p>
+                Prodejní cena:
+                <span id="sale-price"></span>
+            </p>
+
+            <p>
+                Viditelné:
+                <span id="item-active"></span>
+            </p>
+
+            <img id="item-image" alt="">
+
+            <button id="edit-button">Upravit</button>
+        </div>
+
+        <div id="item-edit">
+            <h1>Upravit položku</h1>
+
+            <label>
+                Název:
+                <input type="text" id="edit-name">
+            </label>
+
+            <label>
+                Nákupní cena:
+                <input type="number" id="edit-purchase-price">
+            </label>
+
+            <label>
+                Prodejní cena:
+                <input type="number" id="edit-sale-price">
+            </label>
+
+            <label>
+                Obrázek URL:
+                <input type="text" id="edit-image-url">
+            </label>
+
+            <label>
+                Viditelné:
+                <input type="checkbox" id="edit-active">
+            </label>
+
+            <button id="save-button">Uložit</button>
+        </div>
     </main>
 
-    <div id="footer"></div> 
+    <div id="footer"></div>
 
     <script src="../../shared-modules/footer.js"></script>
-    <script src="../../shared-modules/header.js"></script>
-    <script type="module" src="items.js"></script>
+    <script type="module" src="../../shared-modules/header.js"></script>
+    <script type="module" src="item.js"></script>
 
 </body>
 </html>

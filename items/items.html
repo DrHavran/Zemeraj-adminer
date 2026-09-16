@@ -9,34 +9,41 @@
 
     <link
         rel="icon"
-        href="https://cdn3.emoji.gg/emojis/8390-suicide.png"
+        href="https://raw.githubusercontent.com/DrHavran/Zemeraj-adminer/refs/heads/main/logo.png"
         type="image/x-icon"
     >
 
-    <title>Items</title>
+    <title>Položky</title>
 </head>
 
 <body>
     <div id="header"></div>
 
     <main>
-        <h1>Items</h1>
+        <h2>Položky</h2>
 
-        <div id="items-list">
-            
+        <div id="actions">
+            <button id="add-item">Přidat položku</button>
+            <button id="add-stock">Přidat sklad</button>
+            <button id="add-count">Inventura</button>
         </div>
 
-        <div id="item-actions">
-            <button id="add-stock">Nové zboží</button>
-            <button id="add-count">Přidat inventuru</button>
+        <input
+            type="search"
+            id="search"
+            placeholder="Hledat položku..."
+            autocomplete="off"
+        >
+
+        <div id="items-list">
+            Načítání...
         </div>
     </main>
 
     <div id="footer"></div>
 
     <script src="../shared-modules/footer.js"></script>
-    <script src="../shared-modules/header.js"></script>
+    <script type="module" src="../shared-modules/header.js"></script>
     <script type="module" src="items.js"></script>
-
 </body>
 </html>
