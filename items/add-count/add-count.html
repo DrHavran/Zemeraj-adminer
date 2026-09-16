@@ -20,10 +20,27 @@
     <div id="header"></div>
 
     <main>
-        
+        <h2>Nová inventura</h2>
+
+        <input
+            type="search"
+            id="search"
+            placeholder="Hledat položku..."
+            autocomplete="off"
+        >
+
+        <div id="search-results"></div>
+
+        <h3>Počítané položky</h3>
+
+        <div id="selected-items"></div>
+
+        <button id="save-count">Uložit inventuru</button>
+
+        <p id="message"></p>
     </main>
 
-    <div id="footer"></div> 
+    <div id="footer"></div>
 
     <script src="../../shared-modules/footer.js"></script>
     <script type="module" src="../../shared-modules/header.js"></script>
