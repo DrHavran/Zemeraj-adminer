@@ -9,12 +9,22 @@ form.addEventListener("submit", async (event) => {
     message.textContent = "";
 
     const name = document.getElementById("name").value;
-    const purchasePrice = document.getElementById("purchase-price").value;
-    const salePrice = document.getElementById("sale-price").value;
-    const imageUrl = document.getElementById("image-url").value;
-    const active = document.getElementById("active").checked;
+    const purchasePrice =
+        document.getElementById("purchase-price").value;
+    const salePrice =
+        document.getElementById("sale-price").value;
+    const imageUrl =
+        document.getElementById("image-url").value;
+    const active =
+        document.getElementById("active").checked;
 
-    const { error } = await supabase
+
+    // ---------- CREATE ITEM ----------
+
+    const {
+        data: item,
+        error: itemError
+    } = await supabase
         .from("items")
         .insert({
             name: name,
@@ -22,15 +32,47 @@ form.addEventListener("submit", async (event) => {
             sale_price: salePrice,
             image_url: imageUrl || null,
             active: active
-        });
+        })
+        .select()
+        .single();
 
-    if (error) {
-        console.error(error);
-        message.textContent = "Nepodařilo se přidat položku.";
+
+    if (itemError) {
+        console.error(itemError);
+
+        message.textContent =
+            "Nepodařilo se přidat položku.";
+
         return;
     }
 
-    message.textContent = "Položka byla přidána.";
+
+    // ---------- CREATE INITIAL SALE PRICE ----------
+
+    const {
+        error: priceError
+    } = await supabase
+        .from("sale_price_history")
+        .insert({
+            item_id: item.id,
+            price: salePrice
+        });
+
+
+    if (priceError) {
+        console.error(priceError);
+
+        message.textContent =
+            "Položka byla přidána, ale nepodařilo se uložit historii prodejní ceny.";
+
+        return;
+    }
+
+
+    // ---------- SUCCESS ----------
+
+    message.textContent =
+        "Položka byla přidána.";
 
     form.reset();
 

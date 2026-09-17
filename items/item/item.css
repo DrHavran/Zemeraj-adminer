@@ -1,7 +1,440 @@
-#item-edit {
+/* ---------- ITEM PAGE ---------- */
+
+main {
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+
+/* ---------- ITEM VIEW ---------- */
+
+#item-view {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 70px;
+
+    width: fit-content;
+    max-width: 100%;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    box-sizing: border-box;
+}
+
+
+/* ---------- ITEM INFO ---------- */
+
+#item-info {
+    width: auto;
+}
+
+#item-name {
+    margin: 0 0 25px;
+
+    color: #2c2c2c;
+
+    font-size: 1.8rem;
+    line-height: 1.2;
+}
+
+#item-image {
+    display: block;
+
+    width: 220px;
+    height: 220px;
+
+    object-fit: cover;
+
+    margin-bottom: 30px;
+
+    border-radius: 6px;
+}
+
+#item-image.hidden {
     display: none;
 }
 
-.hidden {
-    display: none;
+#item-details {
+    margin-bottom: 30px;
+}
+
+#item-details p {
+    margin: 9px 0;
+
+    color: #555;
+
+    font-size: 0.95rem;
+}
+
+#item-details span {
+    color: #2c2c2c;
+
+    font-weight: 600;
+}
+
+
+/* ---------- EXPECTED STOCK ---------- */
+
+#expected-stock {
+    display: flex;
+    align-items: baseline;
+
+    gap: 8px;
+
+    margin-bottom: 30px;
+
+    color: #555;
+
+    font-size: 0.95rem;
+}
+
+#expected-stock strong {
+    color: #2c2c2c;
+
+    font-size: 1.7rem;
+}
+
+
+/* ---------- BUTTONS ---------- */
+
+#edit-button,
+#save-button {
+    margin-top: 10px;
+
+    padding: 11px 20px;
+
+    border: none;
+    border-radius: 5px;
+
+    background-color: #2c2c2c;
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+#edit-button:hover,
+#save-button:hover {
+    background-color: #3a3a3a;
+}
+
+#edit-button:active,
+#save-button:active {
+    transform: translateY(1px);
+}
+
+
+/* ---------- TIMELINE ---------- */
+
+#timeline-section {
+    width: auto;
+    min-width: 0;
+}
+
+#timeline-section h2 {
+    margin: 0 0 25px;
+
+    color: #2c2c2c;
+
+    font-size: 1.3rem;
+}
+
+#timeline {
+    position: relative;
+
+    padding-left: 35px;
+}
+
+
+/* ---------- TIMELINE LINE ---------- */
+
+#timeline::before {
+    content: "";
+
+    position: absolute;
+
+    top: 8px;
+    bottom: 8px;
+    left: 8px;
+
+    width: 2px;
+
+    background-color: #d0d0d0;
+}
+
+
+/* ---------- TIMELINE EVENT ---------- */
+
+.timeline-event {
+    position: relative;
+
+    display: flex;
+
+    min-height: 55px;
+
+    margin-bottom: 20px;
+}
+
+
+/* ---------- TIMELINE MARKERS ---------- */
+
+.timeline-marker {
+    position: absolute;
+
+    border-radius: 50%;
+}
+
+
+/* Inventory count */
+
+.timeline-count .timeline-marker {
+    width: 14px;
+    height: 14px;
+
+    top: 5px;
+    left: -34px;
+
+    background-color: #4a90e2;
+
+    border: 3px solid #ffffff;
+
+    box-shadow:
+        0 0 0 2px #4a90e2;
+}
+
+
+/* Stock addition */
+
+.timeline-stock .timeline-marker {
+    width: 8px;
+    height: 8px;
+
+    top: 8px;
+    left: -31px;
+
+    background-color: #98c238;
+
+    border: 2px solid #ffffff;
+
+    box-shadow:
+        0 0 0 1px #98c238;
+}
+
+
+/* Price change */
+
+.timeline-price .timeline-marker {
+    width: 7px;
+    height: 7px;
+
+    top: 9px;
+    left: -30px;
+
+    background-color: #d9534f;
+
+    border: 2px solid #ffffff;
+
+    box-shadow:
+        0 0 0 1px #d9534f;
+}
+
+
+/* ---------- TIMELINE CONTENT ---------- */
+
+.timeline-content {
+    padding-bottom: 3px;
+}
+
+.timeline-date {
+    margin-bottom: 3px;
+
+    color: #888;
+
+    font-size: 0.85rem;
+}
+
+.timeline-description {
+    color: #2c2c2c;
+
+    font-size: 0.95rem;
+}
+
+.timeline-description strong {
+    font-weight: 600;
+}
+
+
+/* Stock purchase price */
+
+.timeline-stock .timeline-price {
+    margin-top: 3px;
+
+    color: #999;
+
+    font-size: 0.8rem;
+}
+
+
+/* Price change text */
+
+.timeline-price .timeline-description {
+    color: #c0392b;
+
+    font-size: 0.88rem;
+}
+
+.timeline-price .timeline-description strong {
+    color: #c0392b;
+}
+
+
+/* ---------- EDIT FORM ---------- */
+
+#item-edit {
+    width: min(600px, 100%);
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#item-edit.hidden {
+    display: none !important;
+}
+
+#item-edit h1 {
+    margin: 0 0 25px;
+
+    color: #2c2c2c;
+
+    font-size: 1.6rem;
+}
+
+#item-edit label {
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+
+    margin-bottom: 15px;
+
+    color: #2c2c2c;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+#item-edit input[type="text"],
+#item-edit input[type="number"] {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 11px 12px;
+
+    border: 1px solid #d0d0d0;
+    border-radius: 5px;
+
+    background-color: #fafafa;
+    color: #2c2c2c;
+
+    font-family: inherit;
+
+    font-size: 1rem;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+#item-edit input[type="text"]:focus,
+#item-edit input[type="number"]:focus {
+    border-color: #98c238;
+
+    background-color: #ffffff;
+
+    box-shadow:
+        0 0 0 2px rgba(152, 194, 56, 0.15);
+}
+
+
+/* ---------- ACTIVE CHECKBOX ---------- */
+
+#active-label {
+    flex-direction: row !important;
+
+    align-items: center;
+
+    gap: 8px !important;
+
+    cursor: pointer;
+}
+
+#edit-active {
+    width: 16px;
+    height: 16px;
+
+    margin: 0;
+
+    accent-color: #98c238;
+
+    cursor: pointer;
+}
+
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 900px) {
+
+    #item-view {
+        grid-template-columns: 1fr;
+
+        width: min(700px, 100%);
+
+        gap: 50px;
+    }
+
+    #item-info,
+    #timeline-section {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    main {
+        padding: 15px;
+    }
+
+    #item-image {
+        width: 160px;
+        height: 160px;
+    }
+
+    #timeline {
+        padding-left: 30px;
+    }
+
+    #timeline::before {
+        left: 7px;
+    }
+
+    .timeline-count .timeline-marker {
+        left: -29px;
+    }
+
+    .timeline-stock .timeline-marker {
+        left: -26px;
+    }
+
+    .timeline-price .timeline-marker {
+        left: -25px;
+    }
 }

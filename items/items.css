@@ -1,0 +1,306 @@
+/* ---------- ITEMS PAGE ---------- */
+
+main {
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+
+/* ---------- TITLE ---------- */
+
+main > h2 {
+    margin: 0 0 25px;
+
+    color: #2c2c2c;
+
+    font-size: 1.6rem;
+}
+
+
+/* ---------- ACTIONS ---------- */
+
+#actions {
+    position: absolute;
+    top: 100px;
+    right: 30px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#actions button {
+    padding: 11px 18px;
+
+    border: none;
+    border-radius: 5px;
+
+    background-color: #2c2c2c;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+#actions button:hover {
+    background-color: #3a3a3a;
+}
+
+#actions button:active {
+    transform: translateY(1px);
+}
+
+
+/* ---------- SEARCH ---------- */
+
+#search {
+    width: min(800px, 100%);
+
+    box-sizing: border-box;
+
+    padding: 12px 14px;
+
+    margin-bottom: 8px;
+
+    border: 1px solid #d0d0d0;
+    border-radius: 5px;
+
+    background-color: #ffffff;
+    color: #2c2c2c;
+
+    font-family: inherit;
+    font-size: 1rem;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+#search:focus {
+    border-color: #98c238;
+
+    box-shadow:
+        0 0 0 2px rgba(152, 194, 56, 0.15);
+}
+
+#search::placeholder {
+    color: #999;
+}
+
+
+/* ---------- ITEMS HEADER ---------- */
+
+#items-header {
+    width: min(800px, 100%);
+
+    display: grid;
+
+    grid-template-columns:
+        45px
+        minmax(180px, 1fr)
+        80px
+        100px
+        100px;
+
+    column-gap: 15px;
+
+    box-sizing: border-box;
+
+    padding: 0 12px 5px;
+}
+
+#items-header span {
+    color: #999;
+
+    font-size: 0.75rem;
+    font-weight: 500;
+
+    text-align: right;
+
+    white-space: nowrap;
+}
+
+
+/* ---------- ITEMS LIST ---------- */
+
+#items-list {
+    width: min(800px, 100%);
+}
+
+
+/* ---------- ITEM ---------- */
+
+#items-list > div {
+    display: grid;
+
+    grid-template-columns:
+        45px
+        minmax(180px, 1fr)
+        80px
+        100px
+        100px;
+
+    align-items: center;
+
+    column-gap: 15px;
+
+    padding: 8px 12px;
+
+    margin-bottom: 8px;
+
+    box-sizing: border-box;
+
+    background-color: #ffffff;
+
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+
+    color: #2c2c2c;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+#items-list > div:hover {
+    background-color: #f8f8f8;
+
+    border-color: #98c238;
+
+    transform: translateX(2px);
+}
+
+
+/* ---------- ITEM IMAGE ---------- */
+
+#items-list img {
+    width: 45px;
+    height: 45px;
+
+    object-fit: cover;
+
+    flex-shrink: 0;
+
+    border-radius: 4px;
+}
+
+#items-list img.hidden {
+    visibility: hidden;
+}
+
+
+/* ---------- ITEM NAME ---------- */
+
+#items-list > div > span:nth-of-type(1) {
+    min-width: 0;
+
+    white-space: nowrap;
+
+    font-weight: 600;
+}
+
+
+/* ---------- ITEM DATA ---------- */
+
+.item-purchase-price,
+.item-sale-price,
+.item-stock {
+    text-align: right;
+
+    white-space: nowrap;
+
+    color: #2c2c2c;
+
+    font-size: 0.9rem;
+
+    font-weight: 600;
+}
+
+
+/* ---------- TABLET / SMALL DESKTOP ---------- */
+
+@media (max-width: 900px) {
+
+    #actions {
+        position: static;
+
+        width: min(800px, 100%);
+
+        flex-direction: row;
+        justify-content: flex-end;
+
+        margin-bottom: 20px;
+    }
+
+    #items-header,
+    #items-list > div {
+        grid-template-columns:
+            45px
+            minmax(150px, 1fr)
+            70px
+            90px
+            90px;
+
+        column-gap: 10px;
+    }
+
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 600px) {
+
+    main {
+        padding: 15px;
+    }
+
+    #actions {
+        flex-direction: column;
+    }
+
+    #actions button {
+        width: 100%;
+    }
+
+    #items-header {
+        display: none;
+    }
+
+    #items-list > div {
+        grid-template-columns:
+            40px
+            minmax(0, 1fr);
+
+        row-gap: 4px;
+
+        padding: 8px 10px;
+    }
+
+    #items-list img {
+        width: 40px;
+        height: 40px;
+
+        grid-row: span 3;
+    }
+
+    #items-list img.hidden {
+        visibility: hidden;
+    }
+
+    .item-purchase-price,
+    .item-sale-price,
+    .item-stock {
+        grid-column: 2;
+
+        text-align: left;
+
+        font-size: 0.85rem;
+    }
+
+}

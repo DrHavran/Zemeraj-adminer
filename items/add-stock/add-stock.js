@@ -3,31 +3,45 @@ import { supabase } from "../../shared-modules/auth.js";
 const searchInput = document.getElementById("search");
 const searchResults = document.getElementById("search-results");
 const selectedItemsElement = document.getElementById("selected-items");
+const selectedItemsTitle = document.querySelector("main > h3");
+const selectedHeader = document.getElementById("selected-header");
 const saveButton = document.getElementById("save-stock");
 const message = document.getElementById("message");
 
 let items = [];
 let selectedItems = [];
 
-// Load all items once
+
+// ---------- LOAD ITEMS ----------
+
 async function loadItems() {
+
     const { data, error } = await supabase
         .from("items")
-        .select("id, name")
+        .select("id, name, image_url")
         .order("name");
 
     if (error) {
         console.error(error);
-        message.textContent = "Nepodařilo se načíst položky.";
+
+        message.textContent =
+            "Nepodařilo se načíst položky.";
+
         return;
     }
 
     items = data;
 }
 
-// Search locally
+
+// ---------- SEARCH ----------
+
 searchInput.addEventListener("input", () => {
-    const searchTerm = searchInput.value.toLowerCase().trim();
+
+    const searchTerm =
+        searchInput.value
+            .toLowerCase()
+            .trim();
 
     searchResults.innerHTML = "";
 
@@ -35,21 +49,61 @@ searchInput.addEventListener("input", () => {
         return;
     }
 
-    const results = items.filter(item =>
-        item.name.toLowerCase().includes(searchTerm)
-    );
+    const results =
+        items.filter(item =>
+            item.name
+                .toLowerCase()
+                .includes(searchTerm)
+        );
 
     results.forEach(item => {
-        // Don't show already selected items
-        if (selectedItems.some(selected => selected.id === item.id)) {
+
+        if (
+            selectedItems.some(
+                selected => selected.id === item.id
+            )
+        ) {
             return;
         }
 
-        const element = document.createElement("div");
+        const element =
+            document.createElement("div");
 
-        element.textContent = item.name;
+
+        // ---------- IMAGE ----------
+
+        const image =
+            document.createElement("img");
+
+        if (item.image_url) {
+
+            image.src =
+                item.image_url;
+
+            image.alt =
+                item.name;
+
+        } else {
+
+            image.classList.add("hidden");
+        }
+
+
+        // ---------- NAME ----------
+
+        const name =
+            document.createElement("span");
+
+        name.textContent =
+            item.name;
+
+
+        element.appendChild(image);
+        element.appendChild(name);
+
 
         element.addEventListener("click", () => {
+
             addItem(item);
 
             searchInput.value = "";
@@ -60,10 +114,15 @@ searchInput.addEventListener("input", () => {
     });
 });
 
+
+// ---------- ADD ITEM ----------
+
 function addItem(item) {
+
     selectedItems.push({
         id: item.id,
         name: item.name,
+        image_url: item.image_url,
         quantity: 1,
         pricePerPiece: 0
     });
@@ -71,48 +130,120 @@ function addItem(item) {
     displaySelectedItems();
 }
 
+
+// ---------- DISPLAY SELECTED ITEMS ----------
+
 function displaySelectedItems() {
+
+    const hasItems =
+        selectedItems.length > 0;
+
+    selectedItemsTitle.classList.toggle(
+        "hidden",
+        !hasItems
+    );
+
+    selectedHeader.classList.toggle(
+        "hidden",
+        !hasItems
+    );
+
+    saveButton.classList.toggle(
+        "hidden",
+        !hasItems
+    );
+
     selectedItemsElement.innerHTML = "";
 
+
     selectedItems.forEach(item => {
-        const container = document.createElement("div");
 
-        const name = document.createElement("span");
-        name.textContent = item.name;
+        const container =
+            document.createElement("div");
 
-        const quantity = document.createElement("input");
+
+        // ---------- IMAGE ----------
+
+        const image =
+            document.createElement("img");
+
+        if (item.image_url) {
+
+            image.src =
+                item.image_url;
+
+            image.alt =
+                item.name;
+
+        } else {
+
+            image.classList.add("hidden");
+        }
+
+
+        // ---------- NAME ----------
+
+        const name =
+            document.createElement("span");
+
+        name.textContent =
+            item.name;
+
+
+        // ---------- QUANTITY ----------
+
+        const quantity =
+            document.createElement("input");
+
         quantity.type = "number";
         quantity.min = "1";
         quantity.value = item.quantity;
-        quantity.placeholder = "Množství";
 
         quantity.addEventListener("input", () => {
-            item.quantity = Number(quantity.value);
+
+            item.quantity =
+                Number(quantity.value);
         });
 
-        const price = document.createElement("input");
+
+        // ---------- PRICE ----------
+
+        const price =
+            document.createElement("input");
+
         price.type = "number";
         price.min = "0";
         price.step = "0.01";
         price.value = item.pricePerPiece;
-        price.placeholder = "Cena / ks";
 
         price.addEventListener("input", () => {
-            item.pricePerPiece = Number(price.value);
+
+            item.pricePerPiece =
+                Number(price.value);
         });
 
-        const removeButton = document.createElement("button");
+
+        // ---------- REMOVE BUTTON ----------
+
+        const removeButton =
+            document.createElement("button");
+
         removeButton.type = "button";
         removeButton.textContent = "×";
 
         removeButton.addEventListener("click", () => {
-            selectedItems = selectedItems.filter(
-                selected => selected.id !== item.id
-            );
+
+            selectedItems =
+                selectedItems.filter(
+                    selected =>
+                        selected.id !== item.id
+                );
 
             displaySelectedItems();
         });
 
+
+        container.appendChild(image);
         container.appendChild(name);
         container.appendChild(quantity);
         container.appendChild(price);
@@ -122,45 +253,75 @@ function displaySelectedItems() {
     });
 }
 
+
+// ---------- SAVE ----------
+
 saveButton.addEventListener("click", async () => {
+
     message.textContent = "";
 
     if (selectedItems.length === 0) {
-        message.textContent = "Nebyla vybrána žádná položka.";
+
+        message.textContent =
+            "Nebyla vybrána žádná položka.";
+
         return;
     }
 
+
     // Check values
+
     for (const item of selectedItems) {
-        if (item.quantity < 1 || item.pricePerPiece < 0) {
+
+        if (
+            item.quantity < 1 ||
+            item.pricePerPiece < 0
+        ) {
+
             message.textContent =
                 "Zkontrolujte množství a cenu u všech položek.";
+
             return;
         }
     }
 
-    const stockItems = selectedItems.map(item => ({
-        item_id: item.id,
-        quantity: item.quantity,
-        price_per_piece: item.pricePerPiece
-    }));
 
-    const { error } = await supabase
-        .from("stock_in")
-        .insert(stockItems);
+    // Create stock entries
+
+    const stockItems =
+        selectedItems.map(item => ({
+            item_id: item.id,
+            quantity: item.quantity,
+            price_per_piece: item.pricePerPiece
+        }));
+
+
+    const { error } =
+        await supabase
+            .from("stock_in")
+            .insert(stockItems);
 
     if (error) {
+
         console.error(error);
-        message.textContent = "Nepodařilo se uložit sklad.";
+
+        message.textContent =
+            "Nepodařilo se uložit sklad.";
+
         return;
     }
 
-    message.textContent = "Sklad byl uložen.";
+
+    message.textContent =
+        "Sklad byl uložen.";
 
     selectedItems = [];
+
     searchInput.value = "";
     searchResults.innerHTML = "";
+
     displaySelectedItems();
 });
+
 
 loadItems();

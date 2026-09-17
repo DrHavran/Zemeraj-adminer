@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="item.css">
     <link rel="stylesheet" href="../../shared-modules/general.css">
+    <link rel="stylesheet" href="item.css">
 
     <link
         rel="icon"
@@ -13,66 +13,131 @@
         type="image/x-icon"
     >
 
-    <title>Item</title>
+    <title>Položka</title>
 </head>
 
 <body>
     <div id="header"></div>
 
     <main>
+
+        <!-- ---------- ITEM VIEW ---------- -->
+
         <div id="item-view">
-            <h1 id="item-name"></h1>
 
-            <p>
-                Nákupní cena:
-                <span id="purchase-price"></span>
-            </p>
+            <section id="item-info">
 
-            <p>
-                Prodejní cena:
-                <span id="sale-price"></span>
-            </p>
+                <h1 id="item-name"></h1>
 
-            <p>
-                Viditelné:
-                <span id="item-active"></span>
-            </p>
+                <img id="item-image" alt="">
 
-            <img id="item-image" alt="">
+                <div id="item-details">
 
-            <button id="edit-button">Upravit</button>
+                    <p>
+                        Nákupní cena:
+                        <span id="purchase-price"></span>
+                    </p>
+
+                    <p>
+                        Prodejní cena:
+                        <span id="sale-price"></span>
+                    </p>
+
+                    <p>
+                        Viditelné:
+                        <span id="item-active"></span>
+                    </p>
+
+                </div>
+
+                <div id="expected-stock">
+
+                    <span>Očekávaný stav</span>
+
+                    <strong id="expected-quantity">—</strong>
+
+                    <span>ks</span>
+
+                </div>
+
+                <button id="edit-button">
+                    Upravit
+                </button>
+
+            </section>
+
+
+            <!-- ---------- TIMELINE ---------- -->
+
+            <section id="timeline-section">
+
+                <h2>Historie skladu</h2>
+
+                <div id="timeline">
+                    Načítání...
+                </div>
+
+            </section>
+
         </div>
 
-        <div id="item-edit">
+
+        <!-- ---------- ITEM EDIT ---------- -->
+
+        <div id="item-edit" class="hidden">
+
             <h1>Upravit položku</h1>
 
             <label>
                 Název:
-                <input type="text" id="edit-name">
+                <input
+                    type="text"
+                    id="edit-name"
+                >
             </label>
 
             <label>
                 Nákupní cena:
-                <input type="number" id="edit-purchase-price">
+                <input
+                    type="number"
+                    id="edit-purchase-price"
+                    step="0.01"
+                    min="0"
+                >
             </label>
 
             <label>
                 Prodejní cena:
-                <input type="number" id="edit-sale-price">
+                <input
+                    type="number"
+                    id="edit-sale-price"
+                    step="0.01"
+                    min="0"
+                >
             </label>
 
             <label>
                 Obrázek URL:
-                <input type="text" id="edit-image-url">
+                <input
+                    type="text"
+                    id="edit-image-url"
+                >
             </label>
 
-            <label>
-                Viditelné:
-                <input type="checkbox" id="edit-active">
+            <label id="active-label">
+                <input
+                    type="checkbox"
+                    id="edit-active"
+                >
+                Viditelné
             </label>
 
-            <button id="save-button">Uložit</button>
+            <button id="save-button">
+                Uložit
+            </button>
+
         </div>
+
     </main>
 
     <div id="footer"></div>
